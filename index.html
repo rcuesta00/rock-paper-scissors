@@ -7,91 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Open your console and click the button.</h1>
+    <h1>Welcome to Rock - Paper - Scissors</h1>
+    <div id="btnContainer">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <div id="container">
+        <div class='result'></div>
+        <div class='score'></div>
+    </div>
     <button id="start">Start the game!</button>
+    <div id="textStart"></div>
 </body>
 
-<script>
-    // 0 = rock ; 1 = paper ; 2 = scissors
-    function computerPlay() {
-        let play = Math.floor(Math.random()*3);
-        switch (play) {
-            case 0 : return 'rock';
-            case 1 : return 'paper';
-            case 2 : return 'scissors';
-        }
-    }
-
-    function playRound(playerSelection, computerSelection) {
-
-        // Conditions for the player to win
-        let win = (playerSelection == 'rock'&&computerSelection == 'scissors') || (playerSelection == 'paper'&&computerSelection == 'rock') || (playerSelection == 'scissors'&&computerSelection == 'paper');
-
-        if(playerSelection == computerSelection) { // First condition is draw;
-            return 0;
-        }
-        else if(win) return 1;
-        else if(!win) return 2; // Last condition is lose;
-    }
-
-    function game() {
-
-        options = ['rock','paper','scissors'];
-        let scorePlayer = 0;
-        let scoreComputer = 0;
-
-        //Cycle for rounds       
-        for(i = 0 ; i < 5 ; i++ ) {
-
-            let playerSelection = prompt('Make your choice','rock');
-
-            if(playerSelection == null){
-                console.log('Thanks for not playing anymore...');
-                return;
-            }
-            // Check if the player's option is included in the game
-            else if ( !(options.includes(playerSelection.toLowerCase())) ) {
-                console.log('That is not an option.');
-                i--;
-                continue;
-            }
-
-            else if( options.includes(playerSelection.toLowerCase()) ) {
-
-                const computerSelection = computerPlay();
-
-                let result = playRound(playerSelection.toLowerCase(), computerSelection);
-
-                switch (result) {
-                    case 0 : 
-                        console.log('Draw');
-                        break;
-                    case 1 : 
-                        scorePlayer += 1; 
-                        console.log('You win');
-                        break;
-                    case 2 : 
-                        scoreComputer += 1; 
-                        console.log('You lose');
-                        break;
-                }
-            }
-        }
-        console.log('The score is: player = ' + scorePlayer + '; computer = ' + scoreComputer);
-        if(scorePlayer == scoreComputer) console.log('OVERALL DRAW! THAT IS WEIRD');
-        else if(scorePlayer > scoreComputer) console.log('YOU WIN!');
-        else console.log('COMPUTER WINS :(');
-    }
-
-
-
-document.getElementById('start').onclick = function () {
-    console.clear();
-    game();
-}
-
-
-
-</script>
+<script src="script.js"> </script>
 
 </html>
